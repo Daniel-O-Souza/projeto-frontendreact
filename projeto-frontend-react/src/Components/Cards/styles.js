@@ -4,9 +4,9 @@ import styled from "styled-components";
 export const Card = styled.div`
     display: grid;
     border: 1px solid black;
-    margin: 5px;
-    width: 20%;
-    height: 15%;
+    margin: 15px;
+    width: 20vw;
+    height: 60vh;
     background-color: black;
     
 
@@ -32,6 +32,7 @@ export const Value = styled.div`
 
 color: white;
 font-family: sans-serif;
+justify-self: center;
 
 `
 

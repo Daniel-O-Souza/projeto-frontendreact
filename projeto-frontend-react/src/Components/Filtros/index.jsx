@@ -3,7 +3,32 @@ import { Container } from "./styles";
 
 
 
-export default function Filtros() {
+export default function Filtros(props) {
+
+    const handlePesquisa = (e) => {
+        props.setPesquisa(e.target.value)
+    }
+
+    const handleOrdenar = (e) => {
+        props.setOrdenar(e.target.value)
+    }
+
+    // const handleFiltro = (e) => {
+    //     props.setFiltro(e.target.value)
+    // }
+
+    // const handleValor = (e) => {
+    //     props.setValor(e.target.value)
+    // }
+
+    const handleMinimo = (e) => {
+        props.setMinimo(e.target.value)
+    }
+
+    const handleMaximo = (e) => {
+        props.setMaximo(e.target.value)
+    }
+
 
     return (
 
@@ -12,25 +37,75 @@ export default function Filtros() {
             <input
                 type="text"
                 placeholder="Buscar por nome"
+                onChange={handlePesquisa}
+                value={props.pesquisa}
             />
 
-            <select>
+            <select
+                onChange={handleOrdenar}
+                value={props.ordenar}
+            >
                 <option value="">Ordenar por preço</option>
                 <option value="Crescente">Crescente</option>
                 <option value="Decrescente">Decrescente</option>
             </select>
 
-            <select>
-                <option value="">Filtrar por preço</option>
-                <option value="Crescente">Maior preço</option>
-                <option value="Decrescente">Menor preço</option>
+            {/* <select
+                onChange={handleFiltro}
+                value={props.filtro}
+            >
+                <option value="Valor mínimo">Filtrar por valor</option>
+                <option value="Valor máximo">Valor máximo</option>
+                <option value="Valor mínimo">Valor mínimo</option>
             </select>
 
-            <select>
-                <option value="">Filtrar por nome</option>
-                <option value="Crescente">A - Z</option>
-                <option value="Decrescente">Z - A</option>
+            <select
+                onChange={handleValor}
+                value={props.valor}
+            >
+                <option value="">Selecione o valor</option>
+                <option value="1000000.00">1000000.00</option>
+                <option value="1500000.00">1500000.00</option>
+                <option value="2000000.00">2000000.00</option>
+                <option value="2500000.00">2500000.00</option>
+                <option value="3000000.00">3000000.00</option>
+                <option value="3500000.00">3500000.00</option>
+                <option value="4000000.00">4000000.00</option>
+                <option value="4500000.00">4500000.00</option>
+            </select> */}
+
+            
+            <select
+                onChange={handleMinimo}
+                value={props.minimo}
+            >
+                <option value="">Filtrar por valor mínimo</option>
+                <option value="1000000.00">1000000.00</option>
+                <option value="1500000.00">1500000.00</option>
+                <option value="2000000.00">2000000.00</option>
+                <option value="2500000.00">2500000.00</option>
+                <option value="3000000.00">3000000.00</option>
+                <option value="3500000.00">3500000.00</option>
+                <option value="4000000.00">4000000.00</option>
+                <option value="4500000.00">4500000.00</option>
             </select>
+
+            <select
+                onChange={handleMaximo}
+                value={props.maximo}
+            >
+                <option value="">Filtrar por valor máximo</option>
+                <option value="1000000.00">1000000.00</option>
+                <option value="1500000.00">1500000.00</option>
+                <option value="2000000.00">2000000.00</option>
+                <option value="2500000.00">2500000.00</option>
+                <option value="3000000.00">3000000.00</option>
+                <option value="3500000.00">3500000.00</option>
+                <option value="4000000.00">4000000.00</option>
+                <option value="4500000.00">4500000.00</option>
+            </select>
+
+
 
 
         </Container>
