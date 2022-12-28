@@ -15,7 +15,7 @@ export default function Cards(props) {
             <Image src={props.planeta.imageUrl} alt="imagem" />
             <Name>{props.planeta.name}</Name>
             <Value>R$ {props.planeta.value},00</Value>
-            <Button>Adicionar ao carrinho</Button>
+            <Button onClick={()=> props.addProductsToCart(props.planeta.id)} >Adicionar ao carrinho</Button>
 
         </Card>
 
