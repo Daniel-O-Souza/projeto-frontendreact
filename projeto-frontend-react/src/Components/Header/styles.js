@@ -25,5 +25,6 @@ export const Cabecalho = styled.header`
     padding: 16px;
     border: 1px solid #000;
     background-color: orange;
+    
 `
 

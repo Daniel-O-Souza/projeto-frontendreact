@@ -21,9 +21,9 @@ const CardsContainer = styled.div`
 display: grid;
 grid-template-columns: repeat(auto-fill, minmax(440px, 1fr));
 justify-items: center;
-/* background-image: url("https://getoutside.ordnancesurvey.co.uk/site/uploads/images/2018champs/Blog%20imagery/Dark_sky_locations_hero.jpg"); */
-/* background-size: cover; */
-background-color: #545454;
+background-image: url("https://static6.depositphotos.com/1053932/550/i/600/depositphotos_5508416-stock-photo-aged-wood-texture-gray-background.jpg"); 
+background-size: cover;
+/* background-color: #545454; */
 
 `
 
@@ -37,64 +37,45 @@ function App() {
 
   console.log(productsCart)
  
-  // const onAddProductToCart = (productId) => {
-  //   const productInCart = productsCart.find(product => productId === product.id)
+  const onAddProductToCart = (productId) => {
+    const productInCart = productsCart.find(product => productId === product.id)
 
-  //   if(productInCart) {
-  //     const newProductsInCart = productsCart.map(product => {
-  //       if(productId === product.id) {
-  //         return {
-  //           ...product,
-  //           quantity: product.quantity + 1
-  //         }
-  //       }
+    if(productInCart) {
+      const newProductsInCart = productsCart.map(product => {
+        if(productId === product.id) {
+          return {
+            ...product,
+            quantity: product.quantity + 1
+          }
+        }
 
-  //       return product
-  //     })
+        return product
+      })
 
-  //     setProductsCart({productsCart: newProductsInCart})
-  //   } else {
-  //     const productToAdd = destinos.find(product => productId === product.id)
+      setProductsCart(newProductsInCart)
+    } else {
+      const productToAdd = destinos.find(product => productId === product.id)
 
-  //     const newProductsInCart = [productsCart, {...productToAdd, quantity: 1}]
+      const newProductsInCart = [...productsCart, {...productToAdd, quantity: 1}]
 
-  //     setProductsCart({productsCart: newProductsInCart})
-  //   }
-  // }
-
-
-  function addProductsToCart(id){
-
-  const copyProductsToCart = [...productsCart]
-
-  const item = copyProductsToCart.find((product) => product.id === id)
-
-  if(!item){
-    copyProductsToCart.push({id: id, quantidade: 1})
-  }else{
-    item.quantidade = item.quantidade+1
+      setProductsCart(newProductsInCart)
+    }
   }
 
-  setProductsCart(copyProductsToCart)
+  const onRemoveProductFromCart = (productId) => {
+    const newProductsInCart = productsCart.map((product) => {
+      if(product.id === productId) {
+        return {
+          ...product,
+          quantity: product.quantity - 1
+        }
+      }
+      return product
+    }).filter((product) => product.quantity > 0)
 
-}
-
-function removeProductsToCart(id){
-
-  const copyProductsToCart = [...productsCart]
-
-  const item = copyProductsToCart.find((product) => product.id === id)
-
-  if(item && item.quantidade > 1){
-    item.quantidade = item.quantidade - 1
-    setProductsCart(copyProductsToCart)
-  }else{
-    const arrayFiltered = copyProductsToCart.filter((product)=> product.id !== id)
-
-    setProductsCart(arrayFiltered)
+    setProductsCart(newProductsInCart)
   }
 
-}
 
   return (
     <div>
@@ -109,7 +90,7 @@ function removeProductsToCart(id){
         maximo={maximo}
         setMaximo={setMaximo}
       />
-      <Carrinho productsCart={productsCart} removeProductsToCart={removeProductsToCart} />
+      <Carrinho productsCart={productsCart} onRemoveProductFromCart={onRemoveProductFromCart} />
       <CardsContainer>
         {destinos.filter((planeta) => {
           return planeta.name.toLowerCase().includes(pesquisa.toLowerCase());
@@ -130,7 +111,7 @@ function removeProductsToCart(id){
             return 0;
           })
           .map((planeta) => {
-            return (<Cards planeta={planeta} addProductsToCart={addProductsToCart}/>)
+            return (<Cards planeta={planeta} onAddProductToCart={onAddProductToCart}/>)
           })}
       </CardsContainer>
       <Footer />
