@@ -1,8 +1,6 @@
 import React from "react";
 import { Container } from "./styles";
 
-
-
 export default function Filtros(props) {
 
     const handlePesquisa = (e) => {
@@ -20,7 +18,6 @@ export default function Filtros(props) {
     const handleMaximo = (e) => {
         props.setMaximo(e.target.value)
     }
-
 
     return (
 
@@ -71,9 +68,6 @@ export default function Filtros(props) {
                 <option value="4000000.00">4000000.00</option>
                 <option value="4500000.00">4500000.00</option>
             </select>
-
-
-
 
         </Container>
 

@@ -1,36 +1,52 @@
-import React from "react";
-import ItemDeCarrinho from "../ItemDeCarrinho";
-import { Container, Title } from "./styles";
-
-
-
+import { Container, Title, Titlebox, ValorTotal, Card, Image, Name, Value, Quantidade, Remover } from "./styles";
+import { useEffect } from "react";
 
 export default function Carrinho(props) {
 
-    const totalValue = () => {
-        let total = 0
+  useEffect(() => {
+    if (props.productsCart.length > 0) {
+      const carrinho = JSON.stringify(props.productsCart)
+      localStorage.setItem("compras", carrinho)
+    }
+  }, [props.productsCart])
 
-        for (let product of props.productsCart) {
-            total += props.planeta.value * props.planeta.quantity
-        }
+  useEffect(() => {
+    const novoCarrinho = JSON.parse(localStorage.getItem("compras"))
+    if (novoCarrinho !== null) {
+      props.setProductsCart(novoCarrinho)
+    }
+  }, [])
 
-        return total
+  const renderCarrinho = props.productsCart.map((planeta) => {
+    return <Card>
+      <Image src={planeta.imageUrl} alt="imagem" />
+      <Name>{planeta.name}</Name>
+      <Value>R${planeta.value},00</Value>
+      <Quantidade>Quantidade:{planeta.quantity}</Quantidade>
+      <Remover onClick={() => props.onRemoveProductFromCart(planeta.id)} >Remover</Remover>
+    </Card>
+  })
+
+  const totalValue = () => {
+    let total = 0
+
+    for (let product of props.productsCart) {
+      total += product.value * product.quantity
     }
 
-    return (
-        <div>
-            <p> <Title>Meu Carrinho</Title></p>
-            <Container>
-                {props.productsCart.map((planeta) => {
-                    return <ItemDeCarrinho planeta={planeta} onRemoveProductFromCart={props.onRemoveProductFromCart} productsCart={props.productsCart} />
-                })}
-                
-            </Container>
-            
-        </div>
+    return total
+  }
 
+  return (
+    <Titlebox>
+      <Title>Meu Carrinho:</Title>
+      <Container>
+        {renderCarrinho}
+      </Container>
+      <ValorTotal>Valor total da minha
+        compra: R${totalValue()},00</ValorTotal>
+    </Titlebox>
 
-
-    )
+  )
 
 }
