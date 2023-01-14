@@ -13,7 +13,7 @@ export const Card = styled.div`
 
 `
 
-export const Image = styled.img`
+export const Photo = styled.img`
 
     border-radius: 50%;
     align-items: center;
